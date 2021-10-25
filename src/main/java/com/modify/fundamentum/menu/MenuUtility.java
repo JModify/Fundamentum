@@ -15,6 +15,9 @@ import org.bukkit.inventory.meta.SkullMeta;
 import java.util.Arrays;
 import java.util.UUID;
 
+/**
+ * Menu utility class used for a variety of different functions.
+ */
 public class MenuUtility {
 
     public static void addFillers(Inventory inv){

@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Colorize messages which contain chat color codes.
+ * Supports both hex and bukkit color codes.
+ * Aditionally, both lists and specific messages can be colorized.
+ */
 public class ColorUtil {
 
     /**

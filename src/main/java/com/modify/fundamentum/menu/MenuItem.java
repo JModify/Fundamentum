@@ -15,6 +15,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * A menu item represents an item stack which can be used to represent
+ * different things in an inventory user interface.
+ */
 public class MenuItem {
 
     /** Constants of MHF skulls for easy access */
