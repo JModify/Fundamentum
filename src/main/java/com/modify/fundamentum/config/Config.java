@@ -9,6 +9,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Config file object used for easy configuration management.
+ */
 public class Config
 {
     private final String n;

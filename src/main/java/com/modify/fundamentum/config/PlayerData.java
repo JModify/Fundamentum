@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Player data object used for easy player data flat file storage.
+ */
 public class PlayerData
 {
     private final UUID u;
