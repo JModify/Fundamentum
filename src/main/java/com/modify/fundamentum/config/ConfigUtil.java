@@ -6,8 +6,15 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.InputStream;
 
+/**
+ * Config utility used for config management
+ */
 public class ConfigUtil {
 
+    /**
+     * Copy config to file to include commenting.
+     * @param name name of config to copy.
+     */
     public static void copyConfig(String name){
         Config config = new Config(name);
         if (!config.exists()) {
@@ -16,6 +23,11 @@ public class ConfigUtil {
         }
     }
 
+    /**
+     * Retrieve config instance using config name.
+     * @param name config to retrieve.
+     * @return retrieves the config using name.
+     */
     public static FileConfiguration getConfigByName(String name){
         Config config = new Config(name);
         if(config.exists()){
