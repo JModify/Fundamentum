@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 public class ConfigUtil {
 
-    private void copyConfig(String name){
+    private static void copyConfig(String name){
         Config config = new Config(name);
         if (!config.exists()) {
             InputStream stream = Fundamentum.getPlugin().getResource(name + ".yml");
@@ -16,7 +16,7 @@ public class ConfigUtil {
         }
     }
 
-    public FileConfiguration getConfigByName(String name){
+    public static FileConfiguration getConfigByName(String name){
         Config config = new Config(name);
         if(config.exists()){
             return config.getConfig();
