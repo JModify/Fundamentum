@@ -26,6 +26,8 @@ public class PlugUtil {
             commandMap.register(command.getLabel(), (Command)command);
         }
         catch (Exception e) {
+            PluginLogger.logError("Failed to register bukkit command " + command.getName()
+                    + ". Contact plugin author.");
             e.printStackTrace();
         }
     }

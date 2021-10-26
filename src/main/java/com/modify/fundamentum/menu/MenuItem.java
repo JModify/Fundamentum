@@ -22,9 +22,9 @@ import java.util.UUID;
 public class MenuItem {
 
     /** Constants of MHF skulls for easy access */
-    private static final UUID mhfArrowLeft = UUID.fromString("a68f0b64-8d14-4000-a95f-4b9ba14f8df9");
-    private static final UUID mhfChest = UUID.fromString("73d4e068-3a6d-4c8b-8f85-3323546955c4");
-    private static final UUID mhfArrowRight = UUID.fromString("50c8510b-5ea0-4d60-be9a-7d542d6cd156");
+    public static final UUID mhfArrowLeft = UUID.fromString("a68f0b64-8d14-4000-a95f-4b9ba14f8df9");
+    public static final UUID mhfChest = UUID.fromString("73d4e068-3a6d-4c8b-8f85-3323546955c4");
+    public static final UUID mhfArrowRight = UUID.fromString("50c8510b-5ea0-4d60-be9a-7d542d6cd156");
 
     /** The UUID of the skull owner. */
     private UUID skullOwner;
