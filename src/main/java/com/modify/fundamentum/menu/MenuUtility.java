@@ -20,11 +20,22 @@ import java.util.UUID;
  */
 public class MenuUtility {
 
-    public static void addFillers(Inventory inv){
+    public static void addFillers(Inventory inv, ItemStack fillerItem){
         for(int i = 0; i < inv.getSize(); i++){
             ItemStack is = inv.getItem(i);
             if(is == null || is.getType() == Material.AIR){
-                inv.setItem(i, new MenuItem("", Material.BLACK_STAINED_GLASS_PANE).getMenuItem());
+                inv.setItem(i, fillerItem);
+            }
+        }
+    }
+
+    public static void addFillers(Inventory inv, ItemStack fillerItem, int rangeMin, int rangeMax){
+        for(int i = 0; i < inv.getSize(); i++){
+            ItemStack is = inv.getItem(i);
+            if (i >= rangeMin && i <= rangeMax) {
+                if(is == null || is.getType() == Material.AIR){
+                    inv.setItem(i, fillerItem);
+                }
             }
         }
     }
