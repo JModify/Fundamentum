@@ -5,6 +5,7 @@ import com.modify.fundamentum.text.PluginLogger;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.InputStream;
+import java.util.UUID;
 
 /**
  * Config utility used for config management
@@ -33,7 +34,24 @@ public class ConfigUtil {
         if(config.exists()){
             return config.getConfig();
         }else{
-            PluginLogger.logError("Failed to retrieve config file " + name + ".yml");
+            PluginLogger.logError("Failed to retrieve config file " + name + ".yml." +
+                    "Contact plugin author.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieve player data file using player uuid.
+     * @param playerId player uuid
+     * @return file configuration for player's data file.
+     */
+    public static FileConfiguration getPlayerDataByID(UUID playerId) {
+        PlayerData pd = new PlayerData(playerId);
+        if (pd.exists()) {
+            return pd.getConfig();
+        }else{
+            PluginLogger.logError("Failed to retrieve player data file " +
+                    playerId.toString() + ".yml. Contact plugin author.");
             return null;
         }
     }
