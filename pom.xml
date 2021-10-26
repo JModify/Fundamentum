@@ -6,7 +6,7 @@
 
     <groupId>com.modify.fundamentum</groupId>
     <artifactId>Fundamentum</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <description>
         This project is a library for spigot plugin development by the plugin author Modify.
@@ -47,7 +47,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.22</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
