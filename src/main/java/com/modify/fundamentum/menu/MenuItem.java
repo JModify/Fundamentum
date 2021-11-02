@@ -21,14 +21,6 @@ import java.util.UUID;
  */
 public class MenuItem {
 
-    /** Constants of MHF skulls for easy access */
-    public static final UUID mhfArrowLeft = UUID.fromString("a68f0b64-8d14-4000-a95f-4b9ba14f8df9");
-    public static final UUID mhfChest = UUID.fromString("73d4e068-3a6d-4c8b-8f85-3323546955c4");
-    public static final UUID mhfArrowRight = UUID.fromString("50c8510b-5ea0-4d60-be9a-7d542d6cd156");
-
-    /** The UUID of the skull owner. */
-    private UUID skullOwner;
-
     /** Display name for this menu item. */
     private String itemName;
 
@@ -38,6 +30,9 @@ public class MenuItem {
     /** Item lore for this menu item */
     private String[] lore;
 
+    /** Set the stack size for this menu item */
+    private int stackSize;
+
     /**
      * Create a menu item using only it's display name and material.
      * @param itemName item display name (supports hex and bukkit color codes)
@@ -46,8 +41,8 @@ public class MenuItem {
     public MenuItem(String itemName, Material material) {
         this.itemName = itemName;
         this.lore = null;
-        this.skullOwner = null;
         this.material = material;
+        this.stackSize = 1;
     }
 
     /**
@@ -59,33 +54,22 @@ public class MenuItem {
     public MenuItem(String itemName, Material material, String... lore) {
         this.itemName = itemName;
         this.lore = lore;
-        this.skullOwner = null;
         this.material = material;
+        this.stackSize = 1;
     }
 
     /**
-     * Create an expected skull item with it's item name, owner uuid and lore.
+     * Create a menu item using it's display name, material, stacksize and lore.
      * @param itemName item display name (supports hex and bukkit color codes)
-     * @param skullOwner skull owner, used to set the skull skin.
+     * @param material material type to set item.
+     * @param stackSize size of menu item stack.
      * @param lore lore to display below display name (supports hex and bukkit color codes)
      */
-    public MenuItem(String itemName, UUID skullOwner, String... lore) {
+    public MenuItem(String itemName, Material material, int stackSize, String... lore) {
         this.itemName = itemName;
         this.lore = lore;
-        this.skullOwner = skullOwner;
-        this.material = Material.PLAYER_HEAD;
-    }
-
-    /**
-     * Create an expected skull item with it's item name and owner uuid.
-     * @param itemName item display name (supports hex and bukkit color codes)
-     * @param skullOwner skull owner, used to set the skull skin.
-     */
-    public MenuItem(String itemName, UUID skullOwner) {
-        this.itemName = itemName;
-        this.lore = null;
-        this.skullOwner = skullOwner;
-        this.material = Material.PLAYER_HEAD;
+        this.material = material;
+        this.stackSize = stackSize;
     }
 
     /**
@@ -105,11 +89,11 @@ public class MenuItem {
     }
 
     /**
-     * Set the skull owner of an expected skull item.
-     * @param skullOwner skull owner to copy skin.
+     * Sets the size of the menu item stack.
+     * @param stackSize size to set.
      */
-    public void setSkullOwner(UUID skullOwner) {
-        this.skullOwner = skullOwner;
+    public void setStackSize(int stackSize) {
+        this.stackSize = stackSize;
     }
 
     /**
@@ -121,34 +105,10 @@ public class MenuItem {
     }
 
     /**
-     * Retrieve the item stack for this skull item.
-     * @return item stack of this skull item.
-     */
-    public ItemStack getSkullItem() {
-        if (skullOwner != null) {
-            ItemStack item = new ItemStack(material, 1);
-            SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
-            Objects.requireNonNull(skullMeta);
-
-            skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(skullOwner));
-            skullMeta.setDisplayName(ColorUtil.format(itemName));
-
-            if (lore != null)
-                skullMeta.setLore(ColorUtil.formatList(Arrays.asList(lore)));
-
-            item.setItemMeta(skullMeta);
-            return item;
-        }
-        PluginLogger.logError("Attempted to retrieve skull item with no set owning player. " +
-                "Contact plugin author.");
-        return null;
-    }
-
-    /**
      * Retrieve the menu item as an item stack.
      * @return the menu item's respective item stack.
      */
-    public ItemStack getMenuItem() {
+    public ItemStack get() {
         ItemStack item = new ItemStack(material, 1);
         ItemMeta meta = item.getItemMeta();
         Objects.requireNonNull(meta);
