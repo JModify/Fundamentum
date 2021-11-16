@@ -113,7 +113,7 @@ public class MenuItem {
         ItemMeta meta = item.getItemMeta();
         Objects.requireNonNull(meta);
 
-        meta.setDisplayName(itemName);
+        meta.setDisplayName(ColorUtil.format(itemName));
 
         if (lore != null)
             meta.setLore(ColorUtil.formatList(Arrays.asList(lore)));
