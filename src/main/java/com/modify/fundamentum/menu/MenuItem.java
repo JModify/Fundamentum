@@ -111,7 +111,6 @@ public class MenuItem {
     public ItemStack get() {
         ItemStack item = new ItemStack(material, 1);
         ItemMeta meta = item.getItemMeta();
-        Objects.requireNonNull(meta);
 
         meta.setDisplayName(ColorUtil.format(itemName));
 
