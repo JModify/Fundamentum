@@ -14,9 +14,9 @@ import java.util.UUID;
 public class SkullMenuItem {
 
     /** Constants of MHF skulls for easy access */
-    public static final String mhfArrowLeft = "MHF_ArrowLeft";
-    public static final String mhfChest = "MHF_Chest";
-    public static final String mhfArrowRight = "MHF_ArrowRight";
+    public static final UUID mhfArrowLeft = UUID.fromString("a68f0b64-8d14-4000-a95f-4b9ba14f8df9");
+    public static final UUID mhfChest = UUID.fromString("73d4e068-3a6d-4c8b-8f85-3323546955c4");
+    public static final UUID mhfArrowRight = UUID.fromString("50c8510b-5ea0-4d60-be9a-7d542d6cd156");
 
     /** The UUID of the skull owner. */
     private UUID skullOwner;
@@ -108,6 +108,7 @@ public class SkullMenuItem {
     public ItemStack get() {
         ItemStack item = new ItemStack(Material.PLAYER_HEAD, stackSize);
         SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
+        Objects.requireNonNull(skullMeta);
 
         skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(skullOwner));
         skullMeta.setDisplayName(ColorUtil.format(itemName));
