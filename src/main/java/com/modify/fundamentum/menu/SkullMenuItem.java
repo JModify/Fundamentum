@@ -1,7 +1,6 @@
 package com.modify.fundamentum.menu;
 
 import com.modify.fundamentum.text.ColorUtil;
-import com.modify.fundamentum.text.PluginLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

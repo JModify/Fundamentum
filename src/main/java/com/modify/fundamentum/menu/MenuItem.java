@@ -1,19 +1,11 @@
 package com.modify.fundamentum.menu;
 
 import com.modify.fundamentum.text.ColorUtil;
-import com.modify.fundamentum.text.PluginLogger;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
 
 /**
  * A menu item represents an item stack which can be used to represent

@@ -1,7 +1,7 @@
 package com.modify.fundamentum.config;
 
 import com.modify.fundamentum.Fundamentum;
-import com.modify.fundamentum.text.PluginLogger;
+import com.modify.fundamentum.text.PlugLogger;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.InputStream;
@@ -13,7 +13,7 @@ import java.util.UUID;
 public class ConfigUtil {
 
     /**
-     * Copy config to file to include commenting.
+     * Copies config into it's file to include commenting.
      * @param name name of config to copy.
      */
     public static void copyConfig(String name){
@@ -34,7 +34,7 @@ public class ConfigUtil {
         if(config.exists()){
             return config.getConfig();
         }else{
-            PluginLogger.logError("Failed to retrieve config file " + name + ".yml." +
+            PlugLogger.logError("Failed to retrieve config file " + name + ".yml." +
                     "Contact plugin author.");
             return null;
         }
@@ -50,7 +50,7 @@ public class ConfigUtil {
         if (pd.exists()) {
             return pd.getConfig();
         }else{
-            PluginLogger.logError("Failed to retrieve player data file " +
+            PlugLogger.logError("Failed to retrieve player data file " +
                     playerId.toString() + ".yml. Contact plugin author.");
             return null;
         }

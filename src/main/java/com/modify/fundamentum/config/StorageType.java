@@ -8,7 +8,7 @@ public enum StorageType {
     /** Cross-platform document-oriented database program */
     MONGODB,
 
-    /** Flatfile storage in plugin folder */
+    /** Flatfile storage in plugins folder */
     FLATFILE
 
 }

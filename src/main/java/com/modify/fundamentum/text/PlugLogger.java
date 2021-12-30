@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  * Logger class used for communication between the plugin
  * and server console.
  */
-public class PluginLogger {
+public class PlugLogger {
 
     /** Retrieves the bukkit logger */
     @Getter private static final Logger logger = Bukkit.getLogger();
@@ -32,7 +32,7 @@ public class PluginLogger {
     }
 
     /**
-     * Send an info message to the server console.
+     * Log an info message to the server console.
      * @param message message to send.
      */
     public static void logInfo(String message){
