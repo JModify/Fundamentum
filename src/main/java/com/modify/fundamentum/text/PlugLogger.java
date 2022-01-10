@@ -1,5 +1,6 @@
 package com.modify.fundamentum.text;
 
+import com.modify.fundamentum.Fundamentum;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 
@@ -13,7 +14,7 @@ import java.util.logging.Logger;
 public class PlugLogger {
 
     /** Retrieves the bukkit logger */
-    @Getter private static final Logger logger = Bukkit.getLogger();
+    @Getter private static final Logger logger = Fundamentum.getPlugin().getLogger();
 
     /**
      * Log an error to the server console.
