@@ -2,6 +2,8 @@ package com.modify.fundamentum.menu;
 
 import com.modify.fundamentum.text.ColorUtil;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -25,16 +27,20 @@ public class MenuItem {
     /** Set the stack size for this menu item */
     private int stackSize;
 
+    /** Whether or not the menu item has an enchant glow */
+    boolean enchantGlow;
+
     /**
      * Create a menu item using only it's display name and material.
      * @param itemName item display name (supports hex and bukkit color codes)
      * @param material material type to set item.
      */
-    public MenuItem(String itemName, Material material) {
+    public MenuItem(String itemName, Material material, boolean enchantGlow) {
         this.itemName = itemName;
         this.lore = null;
         this.material = material;
         this.stackSize = 1;
+        this.enchantGlow = enchantGlow;
     }
 
     /**
@@ -43,11 +49,12 @@ public class MenuItem {
      * @param material material type to set item.
      * @param lore lore to display below display name (supports hex and bukkit color codes)
      */
-    public MenuItem(String itemName, Material material, String... lore) {
+    public MenuItem(String itemName, Material material, boolean enchantGlow, String... lore) {
         this.itemName = itemName;
         this.lore = lore;
         this.material = material;
         this.stackSize = 1;
+        this.enchantGlow = enchantGlow;
     }
 
     /**
@@ -57,11 +64,12 @@ public class MenuItem {
      * @param stackSize size of menu item stack.
      * @param lore lore to display below display name (supports hex and bukkit color codes)
      */
-    public MenuItem(String itemName, Material material, int stackSize, String... lore) {
+    public MenuItem(String itemName, Material material, int stackSize, boolean enchantGlow, String... lore) {
         this.itemName = itemName;
         this.lore = lore;
         this.material = material;
         this.stackSize = stackSize;
+        this.enchantGlow = enchantGlow;
     }
 
     /**
@@ -101,13 +109,18 @@ public class MenuItem {
      * @return the menu item's respective item stack.
      */
     public ItemStack get() {
-        ItemStack item = new ItemStack(material, 1);
+        ItemStack item = new ItemStack(material, stackSize);
         ItemMeta meta = item.getItemMeta();
 
         meta.setDisplayName(ColorUtil.format(itemName));
 
         if (lore != null)
             meta.setLore(ColorUtil.formatList(Arrays.asList(lore)));
+
+        if (enchantGlow) {
+            meta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
 
         item.setItemMeta(meta);
         return item;
