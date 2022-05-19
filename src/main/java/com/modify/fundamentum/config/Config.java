@@ -18,7 +18,8 @@ public class Config
     private FileConfiguration fc;
     private File file;
     private final JavaPlugin plugin;
-    private static List<Config> configs;
+
+    public static List<Config> configs;
 
     public Config(final String n) {
         this.plugin = JavaPlugin.getProvidingPlugin(this.getClass());

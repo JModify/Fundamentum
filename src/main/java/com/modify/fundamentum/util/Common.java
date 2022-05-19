@@ -1,4 +1,4 @@
-package com.modify.fundamentum;
+package com.modify.fundamentum.util;
 
 import com.modify.fundamentum.text.ColorUtil;
 import com.modify.fundamentum.text.PlugLogger;

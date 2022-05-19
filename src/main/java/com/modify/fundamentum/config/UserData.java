@@ -16,22 +16,22 @@ import java.util.UUID;
 /**
  * Player data object used for easy player data flat file storage.
  */
-public class PlayerData
+public class UserData
 {
     private final UUID u;
     private FileConfiguration fc;
     private File file;
     private static final JavaPlugin plugin = Fundamentum.getPlugin();
-    private static List<PlayerData> configs = new ArrayList<PlayerData>();
+    private static List<UserData> configs = new ArrayList<UserData>();
 
-    private PlayerData(final Player p) {
+    public UserData(final Player p) {
         this.u = p.getUniqueId();
-        PlayerData.configs.add(this);
+        UserData.configs.add(this);
     }
 
-    public PlayerData(final UUID u) {
+    public UserData(final UUID u) {
         this.u = u;
-        PlayerData.configs.add(this);
+        UserData.configs.add(this);
     }
 
     public Player getOwner() {
@@ -61,7 +61,7 @@ public class PlayerData
     }
 
     public static JavaPlugin getInstance() {
-        if (PlayerData.plugin == null) {
+        if (UserData.plugin == null) {
             try {
                 throw new Exception();
             }
@@ -69,25 +69,25 @@ public class PlayerData
                 e.printStackTrace();
             }
         }
-        return PlayerData.plugin;
+        return UserData.plugin;
     }
 
-    public static PlayerData getConfig(final Player p) {
-        for (final PlayerData c : PlayerData.configs) {
+    public static UserData getConfig(final Player p) {
+        for (final UserData c : UserData.configs) {
             if (c.getOwnerUUID().equals(p.getUniqueId())) {
                 return c;
             }
         }
-        return new PlayerData(p);
+        return new UserData(p);
     }
 
-    public static PlayerData getConfig(final UUID u) {
-        for (final PlayerData c : PlayerData.configs) {
+    public static UserData getConfig(final UUID u) {
+        for (final UserData c : UserData.configs) {
             if (c.getOwnerUUID().equals(u)) {
                 return c;
             }
         }
-        return new PlayerData(u);
+        return new UserData(u);
     }
 
     public boolean delete() {
@@ -106,7 +106,7 @@ public class PlayerData
     }
 
     public static File getDataFolder() {
-        final File dir = new File(PlayerData.class.getProtectionDomain().getCodeSource().getLocation().getPath().replaceAll("%20", " "));
+        final File dir = new File(UserData.class.getProtectionDomain().getCodeSource().getLocation().getPath().replaceAll("%20", " "));
         final File d = new File(dir.getParentFile().getPath(), getInstance().getName() + "/data/");
         if (!d.exists()) {
             d.mkdirs();
