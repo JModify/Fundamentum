@@ -7,7 +7,9 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * A menu item represents an item stack which can be used to represent
@@ -22,7 +24,7 @@ public class MenuItem {
     private Material material;
 
     /** Item lore for this menu item */
-    private String[] lore;
+    private List<String> lore;
 
     /** Set the stack size for this menu item */
     private int stackSize;
@@ -37,7 +39,7 @@ public class MenuItem {
      */
     public MenuItem(String itemName, Material material, boolean enchantGlow) {
         this.itemName = itemName;
-        this.lore = null;
+        this.lore = new ArrayList<>();
         this.material = material;
         this.stackSize = 1;
         this.enchantGlow = enchantGlow;
@@ -49,12 +51,12 @@ public class MenuItem {
      * @param material material type to set item.
      * @param lore lore to display below display name (supports hex and bukkit color codes)
      */
-    public MenuItem(String itemName, Material material, boolean enchantGlow, String... lore) {
+    public MenuItem(String itemName, Material material, boolean enchantGlow, List<String> lore) {
         this.itemName = itemName;
-        this.lore = lore;
         this.material = material;
         this.stackSize = 1;
         this.enchantGlow = enchantGlow;
+        this.lore = lore;
     }
 
     /**
@@ -64,7 +66,7 @@ public class MenuItem {
      * @param stackSize size of menu item stack.
      * @param lore lore to display below display name (supports hex and bukkit color codes)
      */
-    public MenuItem(String itemName, Material material, int stackSize, boolean enchantGlow, String... lore) {
+    public MenuItem(String itemName, Material material, int stackSize, boolean enchantGlow, List<String> lore) {
         this.itemName = itemName;
         this.lore = lore;
         this.material = material;
@@ -100,7 +102,7 @@ public class MenuItem {
      * Set the lore of this menu item.
      * @param lore lore text to display below item name.
      */
-    public void setLore(String... lore) {
+    public void setLore(List<String> lore) {
         this.lore = lore;
     }
 
@@ -114,8 +116,8 @@ public class MenuItem {
 
         meta.setDisplayName(ColorUtil.format(itemName));
 
-        if (lore != null)
-            meta.setLore(ColorUtil.formatList(Arrays.asList(lore)));
+        if (!lore.isEmpty())
+            meta.setLore(ColorUtil.formatList(lore));
 
         if (enchantGlow) {
             meta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
