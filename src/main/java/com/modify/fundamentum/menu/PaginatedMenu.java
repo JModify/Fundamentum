@@ -11,7 +11,7 @@ public abstract class PaginatedMenu extends Menu {
     protected final int maxItemsPerPage = 28;
     protected int index = 0;
 
-    public PaginatedMenu(Player player, int maxItemsPerPage) {
+    public PaginatedMenu(Player player) {
         super(player);
     }
 
