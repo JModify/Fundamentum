@@ -41,19 +41,67 @@ public class MenuUtility {
         }
     }
 
-    public static ItemStack getRightArrow(String name, boolean enchantGlow, List<String> lore) {
-        SkullMenuItem skullMenuItem = new SkullMenuItem(name, SkullMenuItem.mhfArrowRight, lore);
-        return skullMenuItem.get();
+    public static ItemStack getChestHead(final String name, final String... lore) {
+        final ItemStack item = new ItemStack(Material.PLAYER_HEAD, 1);
+        final SkullMeta meta = (SkullMeta) item.getItemMeta();
+
+        meta.setOwningPlayer(Bukkit.getOfflinePlayer("MHF_Chest"));
+
+        // Set the name of the item
+        if(name != null){
+            meta.setDisplayName(ColorUtil.format(name));
+        }else{
+            meta.setDisplayName("");
+        }
+        // Set the lore of the item
+        if(lore != null) {
+            meta.setLore(ColorUtil.formatList(Arrays.asList(lore)));
+        }
+        item.setItemMeta(meta);
+
+        return item;
     }
 
-    public static ItemStack getLeftArrow(String name, boolean enchantGlow, List<String> lore) {
-        SkullMenuItem skullMenuItem = new SkullMenuItem(name, SkullMenuItem.mhfArrowLeft, lore);
-        return skullMenuItem.get();
+    public static ItemStack getLeftArrow(final String name, final String... lore) {
+        final ItemStack item = new ItemStack(Material.PLAYER_HEAD, 1);
+        final SkullMeta meta = (SkullMeta) item.getItemMeta();
+
+        meta.setOwningPlayer(Bukkit.getOfflinePlayer("MHF_ArrowLeft"));
+
+        // Set the name of the item
+        if(name != null){
+            meta.setDisplayName(ColorUtil.format(name));
+        }else{
+            meta.setDisplayName("");
+        }
+        // Set the lore of the item
+        if(lore != null) {
+            meta.setLore(ColorUtil.formatList(Arrays.asList(lore)));
+        }
+        item.setItemMeta(meta);
+
+        return item;
     }
 
-    public static ItemStack getChestHead(String name, boolean enchantGlow, List<String> lore) {
-        SkullMenuItem skullMenuItem = new SkullMenuItem(name, SkullMenuItem.mhfChest, lore);
-        return skullMenuItem.get();
+    public static ItemStack getRightArrow(final String name, final String... lore) {
+        final ItemStack item = new ItemStack(Material.PLAYER_HEAD, 1);
+        final SkullMeta meta = (SkullMeta) item.getItemMeta();
+
+        meta.setOwningPlayer(Bukkit.getOfflinePlayer("MHF_ArrowRight"));
+
+        // Set the name of the item
+        if(name != null){
+            meta.setDisplayName(ColorUtil.format(name));
+        }else{
+            meta.setDisplayName("");
+        }
+        // Set the lore of the item
+        if(lore != null) {
+            meta.setLore(ColorUtil.formatList(Arrays.asList(lore)));
+        }
+        item.setItemMeta(meta);
+
+        return item;
     }
 
 
