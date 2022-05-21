@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -39,5 +40,23 @@ public class MenuUtility {
             }
         }
     }
+
+    public static ItemStack getRightArrow(String name, boolean enchantGlow, List<String> lore) {
+        SkullMenuItem skullMenuItem = new SkullMenuItem(name, SkullMenuItem.mhfArrowRight, lore);
+        return skullMenuItem.get();
+    }
+
+    public static ItemStack getLeftArrow(String name, boolean enchantGlow, List<String> lore) {
+        SkullMenuItem skullMenuItem = new SkullMenuItem(name, SkullMenuItem.mhfArrowLeft, lore);
+        return skullMenuItem.get();
+    }
+
+    public static ItemStack getChestHead(String name, boolean enchantGlow, List<String> lore) {
+        SkullMenuItem skullMenuItem = new SkullMenuItem(name, SkullMenuItem.mhfChest, lore);
+        return skullMenuItem.get();
+    }
+
+
+
 
 }

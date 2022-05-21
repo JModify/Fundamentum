@@ -3,12 +3,13 @@ package com.modify.fundamentum.menu;
 import com.modify.fundamentum.text.ColorUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.UUID;
+import java.sql.Array;
+import java.util.*;
 
 public class SkullMenuItem {
 
@@ -24,10 +25,13 @@ public class SkullMenuItem {
     private String itemName;
 
     /** Item lore for this menu item */
-    private String[] lore;
+    private List<String> lore;
 
     /** Stack size for this menu item */
     private int stackSize;
+
+    /** Whether the skull menu item has an enchant glow */
+    private boolean enchantGlow;
 
     /**
      * Create a skull item with it's item name, owner uuid and lore.
@@ -35,11 +39,12 @@ public class SkullMenuItem {
      * @param skullOwner skull owner, used to set the skull skin.
      * @param lore lore to display below display name (supports hex and bukkit color codes)
      */
-    public SkullMenuItem(String itemName, UUID skullOwner, String... lore) {
+    public SkullMenuItem(String itemName, UUID skullOwner, boolean enchantGlow, List<String> lore) {
         this.itemName = itemName;
         this.lore = lore;
         this.skullOwner = skullOwner;
         this.stackSize = 1;
+        this.enchantGlow = enchantGlow;
     }
 
     /**
@@ -49,9 +54,23 @@ public class SkullMenuItem {
      */
     public SkullMenuItem(String itemName, UUID skullOwner) {
         this.itemName = itemName;
-        this.lore = null;
+        this.lore = new ArrayList<>();
         this.skullOwner = skullOwner;
         this.stackSize = 1;
+        this.enchantGlow = false;
+    }
+
+    /**
+     * Create a skull item with it's item name and owner uuid.
+     * @param itemName item display name (supports hex and bukkit color codes)
+     * @param skullOwner skull owner, used to set the skull skin.
+     */
+    public SkullMenuItem(String itemName, UUID skullOwner, List<String> lore) {
+        this.itemName = itemName;
+        this.lore = lore;
+        this.skullOwner = skullOwner;
+        this.stackSize = 1;
+        this.enchantGlow = false;
     }
 
     /**
@@ -61,11 +80,12 @@ public class SkullMenuItem {
      * @param stackSize size of menu item stack.
      * @param lore lore to display below display name (supports hex and bukkit color codes)
      */
-    public SkullMenuItem(String itemName, UUID skullOwner, int stackSize, String... lore) {
+    public SkullMenuItem(String itemName, UUID skullOwner, int stackSize, boolean enchantGlow, List<String> lore) {
         this.itemName = itemName;
         this.lore = lore;
         this.skullOwner = skullOwner;
         this.stackSize = stackSize;
+        this.enchantGlow = enchantGlow;
     }
 
     /**
@@ -96,7 +116,7 @@ public class SkullMenuItem {
      * Set the lore of this menu item.
      * @param lore lore text to display below item name.
      */
-    public void setLore(String... lore) {
+    public void setLore(List<String> lore) {
         this.lore = lore;
     }
 
@@ -113,7 +133,12 @@ public class SkullMenuItem {
         skullMeta.setDisplayName(ColorUtil.format(itemName));
 
         if (lore != null)
-            skullMeta.setLore(ColorUtil.formatList(Arrays.asList(lore)));
+            skullMeta.setLore(ColorUtil.formatList(lore));
+
+        if (enchantGlow) {
+            skullMeta.addEnchant(Enchantment.ARROW_INFINITE,1,true);
+            skullMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
 
         item.setItemMeta(skullMeta);
         return item;
