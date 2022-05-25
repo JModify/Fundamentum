@@ -19,12 +19,12 @@ public class Config
     private File file;
     private final JavaPlugin plugin;
 
-    public static List<Config> configs;
+    public static List<Config> cache = new ArrayList<>();
 
     public Config(final String n) {
         this.plugin = JavaPlugin.getProvidingPlugin(this.getClass());
         this.n = n;
-        Config.configs.add(this);
+        Config.cache.add(this);
     }
 
     public static void copy(InputStream in, File file) {
@@ -67,7 +67,7 @@ public class Config
     }
 
     public static Config getConfig(final String n) {
-        for (final Config c : Config.configs) {
+        for (final Config c : Config.cache) {
             if (c.getName().equals(n)) {
                 return c;
             }
@@ -151,6 +151,6 @@ public class Config
     }
 
     static {
-        Config.configs = new ArrayList<Config>();
+        Config.cache = new ArrayList<Config>();
     }
 }

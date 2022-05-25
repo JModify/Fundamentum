@@ -22,16 +22,16 @@ public class UserData
     private FileConfiguration fc;
     private File file;
     private static final JavaPlugin plugin = Fundamentum.getPlugin();
-    public static List<UserData> configs = new ArrayList<>();
+    public static List<UserData> cache = new ArrayList<>();
 
     public UserData(final Player p) {
         this.u = p.getUniqueId();
-        UserData.configs.add(this);
+        UserData.cache.add(this);
     }
 
     public UserData(final UUID u) {
         this.u = u;
-        UserData.configs.add(this);
+        UserData.cache.add(this);
     }
 
     public Player getOwner() {
@@ -73,7 +73,7 @@ public class UserData
     }
 
     public static UserData getConfig(final Player p) {
-        for (final UserData c : UserData.configs) {
+        for (final UserData c : UserData.cache) {
             if (c.getOwnerUUID().equals(p.getUniqueId())) {
                 return c;
             }
@@ -82,7 +82,7 @@ public class UserData
     }
 
     public static UserData getConfig(final UUID u) {
-        for (final UserData c : UserData.configs) {
+        for (final UserData c : UserData.cache) {
             if (c.getOwnerUUID().equals(u)) {
                 return c;
             }
