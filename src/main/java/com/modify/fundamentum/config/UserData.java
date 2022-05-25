@@ -22,7 +22,7 @@ public class UserData
     private FileConfiguration fc;
     private File file;
     private static final JavaPlugin plugin = Fundamentum.getPlugin();
-    private static List<UserData> configs = new ArrayList<>();
+    public static List<UserData> configs = new ArrayList<>();
 
     public UserData(final Player p) {
         this.u = p.getUniqueId();
