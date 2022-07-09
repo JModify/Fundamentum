@@ -1,6 +1,7 @@
 package com.modify.fundamentum.menu;
 
 import lombok.Getter;
+import lombok.NonNull;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -59,4 +60,9 @@ public abstract class Menu implements InventoryHolder {
      * @param e event instance
      */
     public abstract void handleMenu(InventoryClickEvent e);
+
+    @Override
+    public @NonNull Inventory getInventory() {
+        return inventory;
+    }
 }

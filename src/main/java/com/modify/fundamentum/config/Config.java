@@ -1,156 +1,73 @@
 package com.modify.fundamentum.config;
 
-import org.bukkit.configuration.Configuration;
+import com.modify.fundamentum.Fundamentum;
+import com.modify.fundamentum.text.PlugLogger;
+import lombok.NonNull;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.text.MessageFormat;
+import java.util.Locale;
+import java.util.logging.Level;
 
-/**
- * Config file object used for easy configuration management.
- */
-public class Config
-{
-    private final String n;
-    private FileConfiguration fc;
+public abstract class Config {
+
+    private FileConfiguration yaml;
     private File file;
-    private final JavaPlugin plugin;
 
-    public static List<Config> cache = new ArrayList<>();
-
-    public Config(final String n) {
-        this.plugin = JavaPlugin.getProvidingPlugin(this.getClass());
-        this.n = n;
-        Config.cache.add(this);
+    public Config() {
+        startup();
     }
 
-    public static void copy(InputStream in, File file) {
-        try {
-            OutputStream out = new FileOutputStream(file);
-            byte[] buf = new byte[1024];
-            int len;
-            while((len=in.read(buf))>0){
-                out.write(buf,0,len);
-            }
-            out.close();
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public String getFileName() {
+        return getClass().getSimpleName().toLowerCase(Locale.ROOT) + ".yml";
     }
 
-    public String getName() {
-        if (this.n == null) {
-            try {
-                throw new Exception();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return this.n;
-    }
+    private void startup() {
+        file = new File(Fundamentum.getPlugin().getDataFolder(), getFileName());
+        createIfNotExists();
 
-    public JavaPlugin getInstance() {
-        if (this.plugin == null) {
-            try {
-                throw new Exception();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return this.plugin;
-    }
-
-    public static Config getConfig(final String n) {
-        for (final Config c : Config.cache) {
-            if (c.getName().equals(n)) {
-                return c;
-            }
-        }
-        return new Config(n);
-    }
-
-    public boolean delete() {
-        return this.getFile().delete();
-    }
-
-    public boolean exists() {
-        if (this.fc == null || this.file == null) {
-            final File temp = new File(this.getDataFolder(), String.valueOf(this.getName()) + ".yml");
-            if (!temp.exists()) {
-                return false;
-            }
-            this.file = temp;
-        }
-        return true;
-    }
-
-    public File getFile() {
-        if (this.file == null) {
-            this.file = new File(this.getDataFolder(), String.valueOf(this.getName() + ".yml"));
-            if (!this.file.exists()) {
-                try {
-                    this.file.createNewFile();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return this.file;
-    }
-
-    public FileConfiguration getConfig() {
-        if (this.fc == null) {
-            this.fc = (FileConfiguration)YamlConfiguration.loadConfiguration(this.getFile());
-        }
-        return this.fc;
-    }
-
-    public File getDataFolder() {
-        final File dir = new File(Config.class.getProtectionDomain().getCodeSource().getLocation().getPath().replaceAll("%20", " "));
-        final File d = new File(dir.getParentFile().getPath(), this.getInstance().getName());
-        if (!d.exists()) {
-            d.mkdirs();
-        }
-        return d;
+        reload();
     }
 
     public void reload() {
-        if (this.file == null) {
-            this.file = new File(this.getDataFolder(), String.valueOf(this.getName() + ".yml"));
-            if (!this.file.exists()) {
-                try {
-                    this.file.createNewFile();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            this.fc = (FileConfiguration)YamlConfiguration.loadConfiguration(this.file);
-            final File defConfigStream = new File(this.plugin.getDataFolder(), String.valueOf(this.getName()) + ".yml");
-            if (defConfigStream != null) {
-                final YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-                this.fc.setDefaults((Configuration)defConfig);
-            }
-        }
+        if (file == null)
+            startup();
+
+        yaml = YamlConfiguration.loadConfiguration(file);
     }
 
-    public void saveConfig() {
+    public @NonNull FileConfiguration get() {
+        if (yaml == null)
+            reload();
+
+        return yaml;
+    }
+
+    public boolean save() {
+        if (file == null || yaml == null)
+            reload();
+
         try {
-            this.getConfig().save(this.getFile());
-        }
-        catch (IOException e) {
+            yaml.save(file);
+
+            return true;
+        } catch (IOException e) {
+            PlugLogger.logError("Failed to save file " + getFileName() + " to " + e.getMessage());
             e.printStackTrace();
+
+            return false;
         }
     }
 
-    static {
-        Config.cache = new ArrayList<Config>();
+    private void createIfNotExists() {
+        if (!file.exists())
+            Fundamentum.getPlugin().saveResource(getFileName(), false);
     }
+
+
 }

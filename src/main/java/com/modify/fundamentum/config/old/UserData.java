@@ -1,4 +1,4 @@
-package com.modify.fundamentum.config;
+package com.modify.fundamentum.config.old;
 
 import com.modify.fundamentum.Fundamentum;
 import org.bukkit.Bukkit;

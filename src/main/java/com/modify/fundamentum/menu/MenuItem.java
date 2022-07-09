@@ -33,37 +33,11 @@ public class MenuItem {
     boolean enchantGlow;
 
     /**
-     * Create a menu item using only it's display name and material.
-     * @param itemName item display name (supports hex and bukkit color codes)
-     * @param material material type to set item.
-     */
-    public MenuItem(String itemName, Material material, boolean enchantGlow) {
-        this.itemName = itemName;
-        this.lore = new ArrayList<>();
-        this.material = material;
-        this.stackSize = 1;
-        this.enchantGlow = enchantGlow;
-    }
-
-    /**
-     * Create a menu item using only it's display name, material and lore.
-     * @param itemName item display name (supports hex and bukkit color codes)
-     * @param material material type to set item.
-     * @param lore lore to display below display name (supports hex and bukkit color codes)
-     */
-    public MenuItem(String itemName, Material material, boolean enchantGlow, List<String> lore) {
-        this.itemName = itemName;
-        this.material = material;
-        this.stackSize = 1;
-        this.enchantGlow = enchantGlow;
-        this.lore = lore;
-    }
-
-    /**
-     * Create a menu item using it's display name, material, stacksize and lore.
+     * Constructs a menu item using the given properties.
      * @param itemName item display name (supports hex and bukkit color codes)
      * @param material material type to set item.
      * @param stackSize size of menu item stack.
+     * @param enchantGlow whether the item should enchant glow
      * @param lore lore to display below display name (supports hex and bukkit color codes)
      */
     public MenuItem(String itemName, Material material, int stackSize, boolean enchantGlow, List<String> lore) {
@@ -72,6 +46,36 @@ public class MenuItem {
         this.material = material;
         this.stackSize = stackSize;
         this.enchantGlow = enchantGlow;
+    }
+
+    /**
+     * Constructs a menu item using the given properties.
+     * @param itemName item display name (supports hex and bukkit color codes)
+     * @param material material type to set item.
+     * @param enchantGlow whether the item should enchant glow
+     * @param lore lore to display below display name (supports hex and bukkit color codes)
+     */
+    public MenuItem(String itemName, Material material, boolean enchantGlow, List<String> lore) {
+        this(itemName, material, 1, enchantGlow, lore);
+    }
+
+    /**
+     * Constructs a menu item using the given properties.
+     * @param itemName item display name (supports hex and bukkit color codes)
+     * @param material material type to set item.
+     * @param enchantGlow whether the item should enchant glow
+     */
+    public MenuItem(String itemName, Material material, boolean enchantGlow) {
+        this(itemName, material, enchantGlow, new ArrayList<>());
+    }
+
+    /**
+     * Create a menu item using only it's display name and material.
+     * @param itemName item display name (supports hex and bukkit color codes)
+     * @param material material type to set item.
+     */
+    public MenuItem(String itemName, Material material) {
+        this(itemName, material, false);
     }
 
     /**

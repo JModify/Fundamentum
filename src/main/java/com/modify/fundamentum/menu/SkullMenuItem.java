@@ -33,19 +33,6 @@ public class SkullMenuItem {
     /** Whether the skull menu item has an enchant glow */
     private boolean enchantGlow;
 
-    /**
-     * Create a skull item with it's item name, owner uuid and lore.
-     * @param itemName item display name (supports hex and bukkit color codes)
-     * @param skullOwner skull owner, used to set the skull skin.
-     * @param lore lore to display below display name (supports hex and bukkit color codes)
-     */
-    public SkullMenuItem(String itemName, UUID skullOwner, boolean enchantGlow, List<String> lore) {
-        this.itemName = itemName;
-        this.lore = lore;
-        this.skullOwner = skullOwner;
-        this.stackSize = 1;
-        this.enchantGlow = enchantGlow;
-    }
 
     /**
      * Create a skull item with it's item name and owner uuid.
@@ -58,6 +45,20 @@ public class SkullMenuItem {
         this.skullOwner = skullOwner;
         this.stackSize = 1;
         this.enchantGlow = false;
+    }
+    
+    /**
+     * Create a skull item with it's item name, owner uuid and lore.
+     * @param itemName item display name (supports hex and bukkit color codes)
+     * @param skullOwner skull owner, used to set the skull skin.
+     * @param lore lore to display below display name (supports hex and bukkit color codes)
+     */
+    public SkullMenuItem(String itemName, UUID skullOwner, boolean enchantGlow, List<String> lore) {
+        this.itemName = itemName;
+        this.lore = lore;
+        this.skullOwner = skullOwner;
+        this.stackSize = 1;
+        this.enchantGlow = enchantGlow;
     }
 
     /**

@@ -32,9 +32,7 @@ public class Common {
     }
 
     public static void broadcast(final String message) {
-        for (final Player online : Bukkit.getOnlinePlayers()) {
-            online.sendMessage(ColorUtil.format(message));
-        }
+        Bukkit.broadcastMessage(ColorUtil.format(message));
     }
 
     public static void broadcast(final String... messages) {
