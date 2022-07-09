@@ -6,7 +6,7 @@
 
     <groupId>com.modify.fundamentum</groupId>
     <artifactId>Fundamentum</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <description>
         This project is a library for spigot plugin development by the plugin author Modify.
