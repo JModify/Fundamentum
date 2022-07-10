@@ -3,23 +3,19 @@ package com.modify.fundamentum.config;
 import com.modify.fundamentum.Fundamentum;
 import com.modify.fundamentum.text.PlugLogger;
 import lombok.NonNull;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.Locale;
-import java.util.logging.Level;
 
-public abstract class Config {
+public abstract class PlugFile {
 
     private FileConfiguration yaml;
     private File file;
 
-    public Config() {
+    public PlugFile() {
         startup();
     }
 
