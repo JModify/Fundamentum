@@ -12,15 +12,18 @@ import java.util.Locale;
 
 public abstract class PlugFile {
 
+    private String name;
+
     private FileConfiguration yaml;
     private File file;
 
-    public PlugFile() {
+    public PlugFile(String name) {
+        this.name = name;
         startup();
     }
 
     public String getFileName() {
-        return getClass().getSimpleName().toLowerCase(Locale.ROOT) + ".yml";
+        return name.toLowerCase() + ".yml";
     }
 
     private void startup() {

@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * Config file object used for easy configuration management.
  */
+@Deprecated
 public class Config
 {
 

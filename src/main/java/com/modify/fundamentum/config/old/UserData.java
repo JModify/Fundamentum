@@ -16,6 +16,7 @@ import java.util.UUID;
 /**
  * Player data object used for easy player data flat file storage.
  */
+@Deprecated
 public class UserData
 {
     private final UUID u;
