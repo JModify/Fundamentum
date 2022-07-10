@@ -21,7 +21,7 @@ public abstract class PlugHook {
         this.name = name;
     }
 
-    private void check() {
+    public void check() {
         if (Bukkit.getServer().getPluginManager().getPlugin(name) != null) {
             hooked = true;
             PlugLogger.logInfo(name + " detected. Plugin successfully hooked.");
