@@ -47,4 +47,12 @@ public class ColorUtil {
         return result;
     }
 
+    public static List<String> stripListColor(List<String> listToStrip) {
+        List<String> result = new ArrayList<>();
+        for (String s : listToStrip) {
+            result.add(ChatColor.stripColor(s));
+        }
+        return result;
+    }
+
 }
