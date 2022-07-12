@@ -1,11 +1,14 @@
 package com.modify.fundamentum.util;
 
 import com.modify.fundamentum.exceptions.UUIDFormatException;
+import com.modify.fundamentum.text.ColorUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.defaults.BukkitCommand;
+import org.bukkit.entity.Player;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -58,6 +61,12 @@ public class PlugUtil {
         }
 
         return sb.toString().trim();
+    }
+
+    public static void sendMessageList(List<String> messageList, Player player) {
+        for (String string : messageList) {
+            player.sendMessage(ColorUtil.format(string));
+        }
     }
 
 }
